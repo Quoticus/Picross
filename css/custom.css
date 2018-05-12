@@ -3,3 +3,29 @@ Author: Quoticus
 Date: May 12th, 2018
 Purpose: Styling file for Picross Website app
 */
+table{
+  border-collapse: collapse;
+}
+
+table td{
+  vertical-align: middle;
+  text-align: center;
+}
+
+.cell{
+  width: 20px;
+  height: 20px;
+  border: 2px solid black;
+  background-color: white;
+}
+
+.hint{
+  vertical-align: middle;
+  text-align: right;
+}
+
+/* Figure out a proper selector for this. Only includes the first row*/
+.hint{
+  vertical-align: bottom;
+  text-align: center;
+}
