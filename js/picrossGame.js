@@ -16,6 +16,74 @@ window.onload = function(){
         }
       }
     }
+    var hintArray = $(".hint");
+    hintArray.each(function(){
+      let hintCell = $(this);
+      let rowNum = hintCell.parent().prop("rowIndex")
+      //get the column
+      let colNum = hintCell.prop("cellIndex");
+      if(rowNum == 0){
+        let colCount = 0;
+        let colString = "";
+        //iterarate through the rows in that column
+        for(var x = 1; x < answerArray.length; x++){
+          if(answerArray[x][colNum]){
+            colCount++;
+            if(x+1 == answerArray.length){
+              if(colString.length != 0){
+                colString += "<br/>"+colCount;
+              } else if(colString.length == 0){
+                colString += colCount;
+              }
+            }
+          } else if(!(answerArray[x][colNum]) && colCount > 0){
+            if(colString.length == 0){
+              colString += colCount + "";
+            }
+            else{
+              colString += "<br/>"+colCount;
+            }
+            colCount = 0;
+          }
+        }
+        if(colString.length == 0){
+          colString = 0;
+        }
+        hintCell.html(colString);
+        //console.log("colString: "+colString+" colString Length: "+colString.length);
+        //console.log("colString Output: "+colString);
+      }
+      else{
+        let rowCount = 0;
+        let rowString = "";
+        for(var y = 1; y < answerArray.length; y++){
+          if(answerArray[rowNum][y]){
+            rowCount++;
+            if(y+1 == answerArray.length){
+              if(rowString.length != 0){
+                rowString += " "+rowCount;
+              } else if(rowString.length == 0){
+                rowString += rowCount;
+              }
+            }
+          }else if(!(answerArray[rowNum][y]) && rowCount > 0){
+            if(rowString.length == 0){
+              rowString += rowCount + "";
+            }
+            else{
+              rowString += " "+rowCount;
+            }
+            rowCount = 0;
+          }
+        }
+        //console.log("rowString: "+rowString+" rowString Length: "+rowString.length);
+        if(rowString.length == 0){
+          rowString = 0;
+        }
+        hintCell.html(rowString);
+        //console.log("rowString Output: "+rowString);
+      }
+    });
 
     tdArray.each(function(){
       let cell = $(this);
@@ -42,7 +110,8 @@ window.onload = function(){
         checkForWin(verifyAnswers(tdArray, answerArray));
       });
     });
-    console.log(tdArray); //Debug - remove before release
+    //console.log(tdArray); //Debug - remove before release
+    //console.log(hintArray); //Debug - remove before release
     console.dir(answerArray); //Debug - remove before release
 }
 
@@ -72,7 +141,7 @@ function verifyAnswers(tdArray, answerArray){
     }
   });
   //console.log("On: "+on+"\nOff: "+off);
-  console.log("Right: "+right+"\nWrong: "+wrong); //Debug - remove before release
+  //console.log("Right: "+right+"\nWrong: "+wrong); //Debug - remove before release
   if(right == total){
     return true;
   }else{
