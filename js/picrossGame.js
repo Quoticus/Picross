@@ -31,7 +31,8 @@ window.onload = function(){
             colCount++;
             if(x+1 == answerArray.length){
               if(colString.length != 0){
-                colString += "<br/>"+colCount;
+                //Adding span beginning and closing tags
+                colString += "<br/>"+"<span id=\"#\">"+colCount+"</span>";
               } else if(colString.length == 0){
                 colString += colCount;
               }
@@ -153,4 +154,11 @@ function checkForWin(winCondition){
   if(winCondition){
     $("#vic").text("You win!");
   }
+}
+
+//Starting to write this function, still needs a lot of work.
+function checkForGroup(cell){
+  let cellRow = cell.parent().prop("rowIndex");
+  let cellCol = cell.prop("cellIndex");
+
 }
