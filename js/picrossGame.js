@@ -154,3 +154,28 @@ function checkForWin(winCondition){
     $("#vic").text("You win!");
   }
 }
+
+//Create a dynamic table with reference IDs for each cell from the input values
+function createTable(rowLength, colLength){
+  let tableDiv = document.createElement("div");
+  tableDiv.id = "dynamicTableDiv";
+  let table = document.createElement("table");
+  for(let y = 0; y < rowLength; y++){
+    let rowDiv = document.createElement("tr");
+    for(let x = 0; x < colLength; x++){
+      let colDiv = document.createElement("td");
+      colDiv.id = "colDiv"+ x;
+      //All these style values can be broken out to CSS doc
+      colDiv.style.height = "20px";
+      colDiv.style.width = "20px";
+      colDiv.style.border = "1px solid black";
+
+      rowDiv.appendChild(colDiv);
+    }
+    rowDiv.id = "rowDiv"+y;
+    table.appendChild(rowDiv);
+  }
+  table.style.borderCollapse = "collapse";
+  tableDiv.appendChild(table);
+  document.body.appendChild(tableDiv);
+}
