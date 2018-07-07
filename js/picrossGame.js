@@ -4,11 +4,14 @@ Date: May 12th, 2018
 Purpose: JavaScipt file for Picross Website app
 */
 window.onload = function(){
+    var tableX = 15;
+    var tableY = 20;
+    createTable(tableX, tableY);
     var tdArray = $(".cell");
     var answerArray = [];
-    for(var x = 0; x < 6; x++){
+    for(var x = 0; x < tableX; x++){
       answerArray[x] = [];
-      for(var y = 0; y < 6; y++){
+      for(var y = 0; y < tableY; y++){
         if((Math.random() * 100) >= 60){
           answerArray[x][y] = true;
         }else {
@@ -165,17 +168,19 @@ function createTable(rowLength, colLength){
     for(let x = 0; x < colLength; x++){
       let colDiv = document.createElement("td");
       colDiv.id = "colDiv"+ x;
-      //All these style values can be broken out to CSS doc
-      colDiv.style.height = "20px";
-      colDiv.style.width = "20px";
-      colDiv.style.border = "1px solid black";
-
+      if(x == 0 && y == 0){
+        colDiv.className = "instructions";
+      }
+      else if(x == 0 || y == 0){
+        colDiv.className = "hint";
+      }else{
+        colDiv.className = "cell";
+      }
       rowDiv.appendChild(colDiv);
     }
     rowDiv.id = "rowDiv"+y;
     table.appendChild(rowDiv);
   }
-  table.style.borderCollapse = "collapse";
   tableDiv.appendChild(table);
   document.body.appendChild(tableDiv);
 }
